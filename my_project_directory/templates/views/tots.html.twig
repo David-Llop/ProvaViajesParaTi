@@ -1,0 +1,5 @@
+<title>Llista Proveidors</title>
+
+{% for prov in proveidors %}
+    <li>{{prov.nom}} {{prov.mail}} {{prov.telf}} {{prov.tipus}} {{prov.actiu}} {{prov.insert}} {{prov.update}}</li>
+{% endfor %}

@@ -13,12 +13,40 @@ class ProveidorRepository extends ServiceEntityRepository
         parent::__construct($registry, Proveidors::class);
     }
 
-    public function insert(Proveidors $proveidor)
+    /**
+    * @return Product[]
+    */
+    public function getAll(): array
     {
         $entityManager = $this->getEntityManager();
         $query=$entityManager->createQuery(
-            'INSERT INTO proveidors (:proveidor.nom, :proveidor.mail, :proveidor.telf, :proveidor.tipus, :proveidor.actiu, :proveidor.creacio, :proveidor.actualitzacio)'
-        )->setParameter('proveidor', $proveidor);
+            'SELECT p FROM App\Entity\Proveidors p'
+        );
+        return $query->getResult();
+    }
+
+    /**
+     * @return Product
+     */
+    public function getById(int $id)
+    {
+        $entityManager = $this->getEntityManager();
+        $query=$entityManager->createQuery(
+            'SELECT p FROM proveidors WHERE p.id == :id'
+        )->setParameter('id', $id);
+        return $query->getResult();
+    }
+
+    /**
+     * @return Product[]
+     */
+    public function getByName(string $name)
+    {
+        $entityManager = $this->getEntityManager();
+        $query=$entityManager->createQuery(
+            'SELECT p FROM proveidors WHERE p.name ORDER BY p.id ASC == :name'
+        )->setParameter('name', $name);
+        return $query->getResult();
     }
 }
 

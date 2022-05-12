@@ -117,7 +117,7 @@ class Proveidors
 
     public function getUpdate(): int
     {
-        return $this->actualiztacio;
+        return $this->actualitzacio;
     }
 
     public function setUpdate(int $update)
