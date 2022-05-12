@@ -26,7 +26,41 @@ class HomeController extends AbstractController
         if ($nouProveidor->isSubmitted() && $nouProveidor->isValid()) { 
             return $this->redirectToRoute('nou_proveidor');
         }
-        return $this->render('views/home.html.twig', ['nouProveidor'=>$nouProveidor->createView(),]);
+
+        $editarProveidor=$this->createFormBuilder($buit)
+            ->add('editarProveidor', SubmitType::class, ['label'=>'Editar Proveidor'])
+            ->getForm();
+        $editarProveidor->handleRequest($request);
+        
+        if ($editarProveidor->isSubmitted() && $editarProveidor->isValid()) { 
+            return $this->redirectToRoute('editar_proveidor');
+        }
+
+        $eliminarProveidor=$this->createFormBuilder($buit)
+            ->add('eliminarProveidor', SubmitType::class, ['label'=>'Eliminar Proveidor'])
+            ->getForm();
+        $eliminarProveidor->handleRequest($request);
+        
+        if ($eliminarProveidor->isSubmitted() && $eliminarProveidor->isValid()) { 
+            return $this->redirectToRoute('elimianr_proveidor');
+        }
+        
+        $veureProveidor=$this->createFormBuilder($buit)
+            ->add('veureProveidor', SubmitType::class, ['label'=>'Veure Proveidors'])
+            ->getForm();
+        
+        $veureProveidor->handleRequest($request);
+        
+        if ($veureProveidor->isSubmitted() && $veureProveidor->isValid()) { 
+            return $this->redirectToRoute('veure_proveidors');
+        }
+
+        return $this->render('views/home.html.twig',
+                                ['nouProveidor'=>$nouProveidor->createView(),
+                                'editarProveidor'=>$editarProveidor->createView(),
+                                'eliminarProveidor'=>$eliminarProveidor->createView(),
+                                'veureProveidors'=>$veureProveidor->createView()
+                            ]);
     }
 }
 ?>
