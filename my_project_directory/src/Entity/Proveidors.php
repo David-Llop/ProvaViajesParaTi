@@ -2,15 +2,58 @@
 
 namespace App\Entity;
 
-class Proveidor
+use App\Repository\ProveidorRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=ProveidorRepository::class)
+ */
+
+class Proveidors
 {
+
+     /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     protected $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     protected $mail;
+
+    /**
+     * @ORM\Column(type="string", length=9)
+     */
     protected $telf;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     protected $tipus;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     protected $actiu;
-    protected $insert;  // data inserció bd
-    protected $update;  // data última actualització
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $creacio;  // data inserció bd
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $actualitzacio;  // data última actualització
 
     public function getNom(): String
     {
@@ -64,22 +107,22 @@ class Proveidor
 
     public function getInsert(): int
     {
-        return $this->insert;
+        return $this->creacio;
     }
 
     public function setInsert(int $insert)
     {
-        $this->insert=$insert;
+        $this->creacio=$insert;
     }
 
     public function getUpdate(): int
     {
-        return $this->update;
+        return $this->actualiztacio;
     }
 
     public function setUpdate(int $update)
     {
-        $this->update=$update;
+        $this->actualitzacio=$update;
     }
 }
 ?>

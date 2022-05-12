@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Proveidor;
+use App\Entity\Proveidors;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ProveidorController extends AbstractController
 {
@@ -22,7 +23,10 @@ class ProveidorController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $proveidor = new Proveidor();
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $proveidor = new Proveidors();
         $proveidor->setNom('A');
         $proveidor->setMail('a@a.a');
         $proveidor->setTelf('123456789');
@@ -49,7 +53,11 @@ class ProveidorController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) { 
             $proveidor=$form->getData();
-            //sql INSERT
+            $proveidor->setInsert(time());
+            $proveidor->setUpdate(time());
+            $entityManager->persist($proveidor);
+            $entityManager->flush();
+            //$this->getDoctrine()->getRepository(Proveidor::class)->insert($proveidor);
             return $this->redirectToRoute('home');
         }
         return $this->render('views/nou_proveidor.html.twig', ['form' => $form->createView(),]);
