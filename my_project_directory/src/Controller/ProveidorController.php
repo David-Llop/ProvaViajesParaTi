@@ -18,9 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProveidorController extends AbstractController
 {
     /**
-     * @Route("/proveidor")
+     * @Route("/proveidor",name="nou_proveidor")
      */
-    public function new(): Response
+    public function new(Request $request): Response
     {
         $proveidor = new Proveidor();
         $proveidor->setNom('A');
@@ -45,6 +45,13 @@ class ProveidorController extends AbstractController
             ->add('actiu', CheckboxType::class, ['label'=>'Actiu'])
             ->add('desa', SubmitType::class, ['label'=>'Desar'])
             ->getForm();
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $proveidor=$form->getData();
+            //sql INSERT
+            return $this->redirectToRoute('home');
+        }
         return $this->render('views/nou_proveidor.html.twig', ['form' => $form->createView(),]);
     }
     
