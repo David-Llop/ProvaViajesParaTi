@@ -16,6 +16,7 @@ class TotsController extends AbstractController
      */
     public function new(): Response
     {
+        date_default_timezone_set('Europe/Madrid');
         $proveidors=$this->getDoctrine()->getRepository(Proveidors::class)->getAll();
         return $this->render('views/tots.html.twig',[
             'proveidors' =>$proveidors

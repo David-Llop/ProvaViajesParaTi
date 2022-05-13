@@ -16,6 +16,7 @@ class HomeController extends AbstractController
      */
     public function new(Request $request)
     {
+        
         $buit=new Buit();
         $buit->setA('a');
         $nouProveidor=$this->createFormBuilder($buit)
@@ -42,7 +43,7 @@ class HomeController extends AbstractController
         $eliminarProveidor->handleRequest($request);
         
         if ($eliminarProveidor->isSubmitted() && $eliminarProveidor->isValid()) { 
-            return $this->redirectToRoute('elimianr_proveidor');
+            return $this->redirectToRoute('eliminar_proveidor');
         }
         
         $veureProveidor=$this->createFormBuilder($buit)

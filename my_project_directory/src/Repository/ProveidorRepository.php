@@ -32,21 +32,22 @@ class ProveidorRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query=$entityManager->createQuery(
-            'SELECT p FROM proveidors WHERE p.id == :id'
+            'SELECT p FROM proveidors WHERE p.id = :id'
         )->setParameter('id', $id);
         return $query->getResult();
     }
 
     /**
-     * @return Product[]
+     * @return Product
      */
     public function getByName(string $name)
     {
         $entityManager = $this->getEntityManager();
         $query=$entityManager->createQuery(
-            'SELECT p FROM proveidors WHERE p.name ORDER BY p.id ASC == :name'
+            'SELECT p FROM App\Entity\Proveidors p
+            WHERE p.nom = :name ORDER BY p.id ASC'
         )->setParameter('name', $name);
-        return $query->getResult();
+        return $query->getResult()[0];
     }
 }
 

@@ -124,5 +124,15 @@ class Proveidors
     {
         $this->actualitzacio=$update;
     }
+
+    public function getCreacioFormat(): string
+    {
+        return date("d-m-Y", $this->creacio);
+    }
+
+    public function getActualitzacioFormat(): string
+    {
+        return date("d-m-Y", $this->actualitzacio);
+    }
 }
 ?>

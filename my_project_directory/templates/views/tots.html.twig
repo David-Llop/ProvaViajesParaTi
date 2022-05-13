@@ -1,5 +1,7 @@
 <title>Llista Proveidors</title>
 
+{#No sé com ficar-hi tabuladors, els \t me'ls printa#}
+<h3>Nom    Mail    Telefon    Tipus    Actiu    Data Alta    Data Modificació</h3>
 {% for prov in proveidors %}
-    <li>{{prov.nom}} {{prov.mail}} {{prov.telf}} {{prov.tipus}} {{prov.actiu}} {{prov.insert}} {{prov.update}}</li>
+    <p>{{prov.nom}}   {{prov.mail}}    {{prov.telf}}    {{prov.tipus}}    {{prov.actiu}}    {{prov.creacioFormat}}    {{prov.actualitzacioFormat}}</p>
 {% endfor %}
