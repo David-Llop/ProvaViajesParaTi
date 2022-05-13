@@ -55,6 +55,11 @@ class Proveidors
      */
     protected $actualitzacio;  // data última actualització
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getNom(): String
     {
         return $this->nom;

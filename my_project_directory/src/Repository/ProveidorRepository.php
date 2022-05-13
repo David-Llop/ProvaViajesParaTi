@@ -32,7 +32,7 @@ class ProveidorRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query=$entityManager->createQuery(
-            'SELECT p FROM proveidors WHERE p.id = :id'
+            'SELECT p FROM App\Entity\Proveidors p WHERE p.id = :id'
         )->setParameter('id', $id);
         return $query->getResult();
     }

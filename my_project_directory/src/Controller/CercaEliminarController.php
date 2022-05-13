@@ -32,6 +32,7 @@ class CercaEliminarController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) { 
             $cerca=$form->getData();
             $proveidor=$this->getDoctrine()->getRepository(Proveidors::class)->getByName($cerca->getA());
+        return $this->redirectToRoute('modificar', ["id"=>$proveidor->getId()]);
         }
         return $this->render('views/cerca_eliminar.html.twig',[
             'form'=>$form->createView(),
