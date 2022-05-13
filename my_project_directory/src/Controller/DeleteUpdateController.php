@@ -40,8 +40,8 @@ class DeleteUpdateController extends AbstractController
             ->add('suprimeix', SubmitType::class, ['label'=>'Eliminar'])
             ->getForm();
 
-        return $this->render('views/deleteupdate.html.twig',[
-            'form'=>$form->createView()
+        return $this->render('views/tots.html.twig',[
+            'proveidors'=>$proveidor//form->createView()
        ]);
     }
 }
