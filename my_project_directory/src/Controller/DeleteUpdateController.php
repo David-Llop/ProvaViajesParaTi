@@ -23,7 +23,10 @@ class DeleteUpdateController extends AbstractController
      */
     public function index(Request $request, $id): Response
     {
-        $proveidor=$this->getDoctrine()->getRepository(Proveidors::class)->getById($id);
+        $entityManager=$this->getDoctrine()->getManager();
+        $proveidor=$entityManager->getRepository(Proveidors::class)->getById($id);
+        //$this->getDoctrine()->getRepository(Proveidors::class)->getById($id);
+        $create=$proveidor->getInsert();
         $form  = $this->createFormBuilder($proveidor)
             ->add('nom',TextType::class)
             ->add('mail',EmailType::class)
@@ -40,8 +43,25 @@ class DeleteUpdateController extends AbstractController
             ->add('suprimeix', SubmitType::class, ['label'=>'Eliminar'])
             ->getForm();
 
-        return $this->render('views/tots.html.twig',[
-            'proveidors'=>$proveidor//form->createView()
+            $form->handleRequest($request);
+            
+            if ($form->isSubmitted() && $form->isValid()) { 
+                if ($form->getClickedButton() === $form->get('desa')) {
+                    # actualitza db
+                    $proveidor=$form->getData();
+                    $proveidor->setInsert($create);
+                    $proveidor->setUpdate(time());
+                    $entityManager->flush();
+                }
+                else {
+                    $entityManager->remove($proveidor);
+                    $entityManager->flush();
+                }
+                return $this->redirectToRoute('home');
+            }
+
+        return $this->render('views/deleteupdate.html.twig',[
+            'form'=>$form->createView()
        ]);
     }
 }
