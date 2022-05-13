@@ -28,17 +28,8 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('nou_proveidor');
         }
 
-        $editarProveidor=$this->createFormBuilder($buit)
-            ->add('editarProveidor', SubmitType::class, ['label'=>'Editar Proveidor'])
-            ->getForm();
-        $editarProveidor->handleRequest($request);
-        
-        if ($editarProveidor->isSubmitted() && $editarProveidor->isValid()) { 
-            return $this->redirectToRoute('editar_proveidor');
-        }
-
         $eliminarProveidor=$this->createFormBuilder($buit)
-            ->add('eliminarProveidor', SubmitType::class, ['label'=>'Eliminar Proveidor'])
+            ->add('eliminarProveidor', SubmitType::class, ['label'=>'Editar/Eliminar Proveidor'])
             ->getForm();
         $eliminarProveidor->handleRequest($request);
         
@@ -58,7 +49,6 @@ class HomeController extends AbstractController
 
         return $this->render('views/home.html.twig',
                                 ['nouProveidor'=>$nouProveidor->createView(),
-                                'editarProveidor'=>$editarProveidor->createView(),
                                 'eliminarProveidor'=>$eliminarProveidor->createView(),
                                 'veureProveidors'=>$veureProveidor->createView()
                             ]);

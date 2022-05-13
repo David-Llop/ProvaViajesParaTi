@@ -46,7 +46,7 @@ class ProveidorController extends AbstractController
                     'Complement' => 'Complement',
                 ],
             ])
-            ->add('actiu', CheckboxType::class, ['label'=>'Actiu'])
+            ->add('actiu', CheckboxType::class, ['label'=>'Actiu', 'required' => false,])
             ->add('desa', SubmitType::class, ['label'=>'Desar'])
             ->getForm();
         $form->handleRequest($request);

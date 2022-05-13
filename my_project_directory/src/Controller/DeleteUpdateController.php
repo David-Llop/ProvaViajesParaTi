@@ -38,7 +38,7 @@ class DeleteUpdateController extends AbstractController
                     'Complement' => 'Complement',
                 ],
             ])
-            ->add('actiu', CheckboxType::class, ['label'=>'Actiu'])
+            ->add('actiu', CheckboxType::class, ['label'=>'Actiu', 'required' => false,])
             ->add('desa', SubmitType::class, ['label'=>'Desar'])
             ->add('suprimeix', SubmitType::class, ['label'=>'Eliminar'])
             ->getForm();
